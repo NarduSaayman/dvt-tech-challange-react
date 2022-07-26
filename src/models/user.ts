@@ -25,3 +25,8 @@ interface IName {
   firstname: string;
   lastname: string;
 }
+
+export interface IUserCredentials {
+  username: string;
+  password: string;
+}
