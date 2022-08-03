@@ -1,19 +1,26 @@
-import { useState, useEffect } from "react";
-import { IProducts } from "../models/products";
+import { useState, useEffect } from 'react';
+import { IProduct } from '../models/products';
 
 export const useFetch = () => {
   // Response state
-  const [data, setData] = useState<IProducts>();
+  const [loading, setLoading] = useState(true);
+  const [data, setData] = useState(null);
+
+  const fetchApi = (url: string) => {
+    fetch(url) // 'https://jsonplaceholder.typicode.com/users'
+      .then((response) => {
+        return response.json();
+      })
+      .then((json) => {
+        console.log(json);
+        setLoading(false);
+        setData(json);
+      });
+  };
 
   useEffect(() => {
-    // Define asynchronous function
-    const fetchApi = async () => {
-      // ...
-    };
-
-    // Call async function
-    fetchApi();
+    fetchApi('');
   }, []);
 
-  return data;
+  return { loading, data };
 };
